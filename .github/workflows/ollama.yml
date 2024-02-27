@@ -1,0 +1,34 @@
+name: Ollama CI
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Ollama
+        run: curl https://ollama.ai/install.sh | sh
+
+      - name: Install Ollama python bindings
+        run: python3 -m pip install ollama
+
+      - name: Pull gemma:2b from registry
+        run:  ollama pull gemma:2b
+
+      - name: Pull gemma:7b from registry
+        run:  ollama pull gemma:2b
+
+      - name: Run run_gemma2b.py
+        run: python3 run_gemma2b.py
+
+      - name: Run run_gemma7b.py
+        run: python3 run_gemma7b.py
