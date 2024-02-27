@@ -24,11 +24,11 @@ jobs:
       - name: Pull gemma:2b from registry
         run:  ollama pull gemma:2b
 
-      - name: Pull gemma:7b from registry
-        run:  ollama pull gemma:2b
-
       - name: Run run_gemma2b.py
         run: python3 run_gemma2b.py
+
+      - name: Pull gemma:7b from registry
+        run:  ollama pull gemma:7b
 
       - name: Run run_gemma7b.py
         run: python3 run_gemma7b.py
